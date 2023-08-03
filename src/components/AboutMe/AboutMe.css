@@ -1,0 +1,91 @@
+.about-me {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.about-me__header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin: 110px auto 0 auto;
+    max-width: 1140px;
+}
+
+.about-me__header-title {
+    color: #fff;
+    padding-bottom: 23px;
+    width: 600px;
+    height: 27px;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.about-me__container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    margin: 66px 70px 101px 70px;
+    gap: 270px;
+}
+
+.about-me__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+}
+
+.about-me__content-name {
+    color: #fff;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin: 0 0 18px 0;
+}
+
+.about-me__content-info {
+    color: #fff;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 0 26px 0;
+}
+
+.about-me__content-history {
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0 0 99px 0;
+}
+
+.about-me__content-link {
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+    margin: 0;
+}
+
+.about-me__photo {
+    width: 270px;
+    height: 327px;
+    margin: 0;
+}

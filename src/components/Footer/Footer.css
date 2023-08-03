@@ -1,0 +1,59 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    height: 172px;
+    background-color: #202020;
+    max-width: 1280px;
+    width: 100%;
+}
+
+.footer__info {
+    border: 1px solid #424242;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    color: #8B8B8B;
+    max-width: 1140px;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 60px auto 0 auto;
+    padding-bottom: 20px;
+}
+
+.footer__links {
+    max-width: 1140px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto 0 auto;
+}
+
+.footer__year {
+    width: 48px;
+    color: #fff;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 910px 0 0;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #fff;
+    text-align: right;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-self: center;
+    margin-right: 20px;
+}
+
+.footer__link:last-child {
+    margin-right: 0;
+}

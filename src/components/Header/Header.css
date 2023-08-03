@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    background-color: #073042;
+    width: 100%;
+    box-sizing: border-box;
+    height: 74px;
+    justify-content: center;
+}
+
+.header__container {
+    margin: 0 0 0 70px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header__logo {
+    margin: 0 919px 0 0;
+}

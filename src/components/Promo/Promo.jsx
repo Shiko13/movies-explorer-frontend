@@ -1,5 +1,5 @@
-import logo from "../../images/world_web.svg";
 import "./Promo.css";
+import logo from "../../images/world_web.svg";
 import NavTab from "../NavTab/NavTab";
 
 function Promo() {
