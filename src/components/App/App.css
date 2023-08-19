@@ -1,13 +1,11 @@
 .page {
-  background-color: #000;
+  background-color: #202020;
   font-family: 'Inter', Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   margin: 0 auto;
   min-height: 100vh;
+  max-width: 1280px;
+  min-width: 320px;
 }

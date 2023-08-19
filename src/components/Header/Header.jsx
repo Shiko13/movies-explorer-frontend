@@ -1,16 +1,25 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
-import Navigation from "../Navigation/Navigation";
+import { Link } from "react-router-dom";
 
-function Header({ isLoggedIn }) {
-    return (
-        <section className="header">
-            <div className="header__container">
-                <img className="header__logo" src={logo} alt="Логотип с буквой «С»" />
-                <Navigation />    
-            </div>
-        </section>
-    );
+function Header() {
+  return (
+    <section className="header">
+      <div className="header__container">
+        <Link to="/" className="header__logo">
+          <img src={logo} alt="Логотип с буквой «С»" />
+        </Link>
+        <div className="header__links">
+          <a className="header__links-registration" href="/signup">
+            Регистрация
+          </a>
+          <a className="header__links-login" href="/signin">
+            Войти
+          </a>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Header;

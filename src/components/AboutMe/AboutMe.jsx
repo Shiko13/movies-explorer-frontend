@@ -1,5 +1,5 @@
 import "./AboutMe.css";
-import photo from "../../images/photo.png";
+import me from "../../images/me.png";
 
 function AboutMe() {
   return (
@@ -9,16 +9,16 @@ function AboutMe() {
       </div>
       <div className="about-me__container">
         <div className="about-me__content">
-          <h1 className="about-me__content-name">Виталий</h1>
+          <h1 className="about-me__content-name">Сергей</h1>
           <h2 className="about-me__content-info">
-            Фронтенд-разработчик, 30 лет
+            Фуллстек-разработчик, 33 года
           </h2>
           <h3 className="about-me__content-history">
-            Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-            меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-            Контур». После того, как прошёл курс по веб-разработке, начал
-            заниматься фриланс-заказами и ушёл с постоянной работы.
+            Окончил Санкт-Петербургский Политехнический университет с красным дипломом.
+            Последние годы программирую на Java, также активно изучаю веб-разработку. 
+            Сейча работаю в Яндекс-Практикуме и в стартапе, где беру
+            как задачи по бэкенду, так и по фронтенду. Ниже можно ознакомиться с некоторыми из моих 
+            работ.
           </h3>
           <a
             className="about-me__content-link"
@@ -27,9 +27,7 @@ function AboutMe() {
             Github
           </a>
         </div>
-        <div className="about-me__photo">
-            <img src={photo} alt="Фотография студента" />
-        </div>
+          <img className="about-me__photo" src={me} alt="Моё фото" />
       </div>
     </section>
   );

@@ -9,20 +9,19 @@
 .techs__header {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 89%;
     box-sizing: border-box;
     border: 1px solid #fff;
     border-left: none;
     border-right: none;
     border-top: none;
     margin: 100px auto 0 auto;
-    max-width: 1140px;
 }
 
 .techs__header-title {
     color: #fff;
     padding-bottom: 23px;
-    width: 600px;
+    width: 200px;
     height: 27px;
     font-size: 22px;
     font-style: normal;
@@ -93,4 +92,91 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.56px;
+}
+
+@media (max-width: 768px) {
+    .techs__header {
+        margin: 90px auto 0 auto;
+        width: 87%;
+    }
+
+    .techs__content {
+        margin: 80px auto 0 auto;
+    }
+
+    .techs__content_title {
+        padding-bottom: 24px;
+    }
+
+    .techs__content_subtitle {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.48px;
+    }
+
+    .techs__stack {
+        margin: 82px auto 100px auto;
+        height: 57px;
+        grid-template-columns: repeat(auto-fill, 84px);
+        max-width: 655px;
+    }
+
+    .techs__stack-content {
+        width: 84px;
+    }
+
+    .techs__stack-name {
+        font-size: 12px;
+        letter-spacing: -0.48px;
+    }
+}
+
+@media (max-width: 700px) {
+    .techs__stack {
+        max-width: 80%;
+    }
+
+    .techs__stack-content {
+        height: 57px;
+    }
+}
+
+@media (max-width: 460px) {
+    .techs__stack {
+        margin-bottom: 220px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 320px) {
+    .techs__header {
+        margin: 28px auto 0 auto;
+        width: 90%;
+    }
+
+    .techs__header-title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .techs__content_title {
+        font-size: 30px;
+        letter-spacing: -1.2px;
+        padding-bottom: 11px;
+    }
+
+    .techs__content {
+        margin: 50px auto 0 auto;
+        max-width: 292px;
+    }
+
+    .techs__content_subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.44px;
+    }
+
+    .techs__stack {
+        margin-top: 50px;
+    }
 }

@@ -63,12 +63,30 @@
         font-size: 40px;
         line-height: 50px;
         text-align: center;
+        padding-left: 28px;
     }
 
     .promo__subtitle {
         text-align: center;
         max-width: 260px;
         margin: 0 auto 0 auto;
+        padding-left: 35px;
+    }
+
+    .promo__about {
+        gap: 20px;
+    }
+
+    .promo {
+        padding-bottom: 73px;
+    }
+}
+
+@media (max-width: 400px) {   
+    .promo__title {
+        font-size: 30px;
+        line-height: 38px;
+        padding-left: 0;
     }
 }
 
@@ -86,5 +104,17 @@
         font-size: 30px;
         line-height: 38px;
         letter-spacing: -1.2px;
+    }
+
+    .promo__about {
+        gap: 23px;
+    }
+
+    .promo__subtitle {
+        padding-left: 0;
+    }
+
+    .promo {
+        padding-bottom: 30px;
     }
 }

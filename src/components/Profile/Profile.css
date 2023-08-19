@@ -1,0 +1,132 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profile__container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 74px 0 70px 0;
+}
+
+.profile__greeting {
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}
+
+.profile__data-name {
+    height: 14px;
+    max-width: 410px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid #424242;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding-bottom: 16px;
+    padding-top: 123px;
+}
+
+.profile__data-text {
+    color: #fff;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}
+
+.profile__data-email {
+    height: 14px;
+    width: 410px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 17px;
+}
+
+.profile__edit {
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+    margin-top: 220px;
+    padding: 0;
+    background-color: #202020;
+    border: none;
+}
+
+.profile__logout {
+    color: #EE3465;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+    margin-top: 16px;
+    background-color: #202020;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .profile__container {
+        margin: 232px 0 267px 0;
+    }
+
+    .profile__data-name {
+        padding-top: 99px;
+    }
+
+    .profile__edit {
+        margin-top: 210px;
+    }
+}
+
+@media (max-width: 500px) {
+    .profile__data-name {
+        max-width: 300px;
+    }
+
+    .profile__data-email {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 320px) {
+    .profile__container {
+        margin: 70px 0 267px 0;
+    }
+
+    .profile__data-name {
+        padding-top: 79px;
+        max-width: 260px;
+    }
+
+    .profile__data-email {
+        max-width: 260px;
+    }
+
+    .profile__edit {
+        margin-top: 377px;
+        font-size: 12px;
+    }
+
+    .profile__logout {
+        font-size: 12px;
+        font-weight: 500;
+    }
+}
