@@ -51,6 +51,10 @@
     margin-right: 20px;
 }
 
+.footer__link:hover {
+    opacity: .5;
+}
+
 .footer__link:last-child {
     margin-right: 0;
 }

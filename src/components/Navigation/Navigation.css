@@ -21,6 +21,10 @@
     align-self: center;
 }
 
+.navigation__logo:hover {
+    opacity: .5;
+}
+
 .navigation__movies-links {
     display: flex;
     flex-direction: row;
@@ -39,6 +43,10 @@
     margin-right: 16px;
 }
 
+.navigation__movies:hover {
+    opacity: .5;
+}
+
 .navigation__movies-burger {
     color: #fff;
     text-align: center;
@@ -48,6 +56,10 @@
     line-height: normal;
     text-decoration: none;
     padding-top: 28px;
+}
+
+.navigation__movies-burger:hover {
+    opacity: .5;
 }
 
 .navigation__movies-burger_active {
@@ -60,6 +72,10 @@
     padding-top: 28px;
 }
 
+.navigation__movies-burger_active:hover {
+    opacity: .5;
+}
+
 .navigation__saved-movies {
     color: #fff;
     text-align: right;
@@ -68,6 +84,9 @@
     font-weight: 500;
     line-height: 18px;
     text-decoration: none;
+}
+.navigation__saved-movies:hover {
+    opacity: .5;
 }
 
 .navigation__saved-movies-burger {
@@ -82,6 +101,10 @@
     padding-bottom: 621px;
 }
 
+.navigation__saved-movies-burger:hover {
+    opacity: .5;
+}
+
 .navigation__saved-movies-burger_active {
     color: #fff;
     text-align: center;
@@ -91,6 +114,10 @@
     line-height: normal;
     padding-top: 22px;
     padding-bottom: 621px;
+}
+
+.navigation__saved-movies-burger_active:hover {
+    opacity: .5;
 }
 
 .navigation__account {
@@ -110,6 +137,10 @@
     font-weight: 500;
     line-height: 12px;
     padding-left: 12px;
+}
+
+.navigation__account-link:hover {
+    opacity: .5;
 }
 
 .navigation__account-image {
@@ -135,6 +166,10 @@
     background-color: transparent;
     align-self: center;
     border: none;
+}
+
+.navigation__burger:hover {
+    opacity: .5;
 }
 
 .navigation__overlay {

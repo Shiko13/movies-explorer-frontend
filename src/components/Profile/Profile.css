@@ -69,6 +69,10 @@
     border: none;
 }
 
+.profile__edit:hover {
+    opacity: .5;
+}
+
 .profile__logout {
     color: #EE3465;
     text-align: center;
@@ -80,6 +84,10 @@
     margin-top: 16px;
     background-color: #202020;
     border: none;
+}
+
+.profile__logout:hover {
+    opacity: .5;
 }
 
 @media (max-width: 768px) {

@@ -39,6 +39,10 @@
     margin-bottom: 99px;
 }
 
+.movie-card-list__button:hover {
+    opacity: .5;
+}
+
 @media (max-width: 1200px) {
     .movie-card-list__container {
         max-width: 1000px;

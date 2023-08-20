@@ -32,6 +32,7 @@
     font-weight: 500;
     line-height: normal;
     padding-bottom: 12px;
+    z-index: 1;
 }
 
 .search-form__button {
@@ -47,6 +48,10 @@
     margin-bottom: 13px;
     border: none;
     box-sizing: border-box;
+}
+
+.search-form__button:hover {
+    opacity: .5;
 }
 
 @media (max-width: 768px) {

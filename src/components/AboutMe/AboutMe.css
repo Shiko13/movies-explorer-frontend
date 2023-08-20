@@ -85,6 +85,10 @@
     margin: 0;
 }
 
+.about-me__content-link:hover {
+    opacity: .5;
+}
+
 .about-me__photo {
     margin: 0;
     width: 270px;

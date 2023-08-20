@@ -10,6 +10,10 @@
     justify-content: center;
 }
 
+.navtab:hover {
+    opacity: .5;
+}
+
 .navtab__link {
     display: flex;
     justify-content: center;
