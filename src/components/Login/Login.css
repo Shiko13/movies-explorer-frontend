@@ -121,16 +121,12 @@
 @media (max-width: 425px) {
     .login__input {
         width: 260px;
+        justify-content: center;
     }
 
     .login__inputs-container {
         justify-content: center;
         margin: 0 auto 0 auto;
-    }
-
-    .login__input {
-        padding: 0;
-        justify-content: center;
     }
 
     .login__error {
