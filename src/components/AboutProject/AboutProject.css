@@ -1,0 +1,214 @@
+.about-project {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.about-project__header {
+    display: flex;
+    flex-direction: column;
+    width: 89%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin: 110px auto 0 auto;
+}
+
+.about-project__header-title {
+    color: #fff;
+    padding-bottom: 23px;
+    width: 200px;
+    height: 27px;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.about-project__container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    margin: 70px auto 0 auto;
+    gap: 40px;
+    width: 89%;
+}
+
+.about-project__content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 550px;
+    width: 100%;
+}
+
+.about-project__content_title {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    padding-bottom: 26px;
+}
+
+.about-project__content_subtitle {
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.about-project__timeline {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 110px auto 110px auto;
+    width: 89%;
+}
+
+.about-project__backend {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 228px;
+    width: 100%;
+}
+
+.about-project__frontend {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 912px;
+    width: 100%;
+}
+
+.about-project__backend-scale {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: #3DDC84;
+    height: 36px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.about-project__frontend-scale {
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: #303030;
+    height: 36px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.about-project__timeline-title {
+    color: #8B8B8B;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    padding-top: 14px;
+}
+
+@media (max-width: 768px) {
+    .about-project__header {
+        margin: 92px auto 0 auto;
+    }
+
+    .about-project__header {
+        width: 87%;
+    }
+
+    .about-project__container {
+        width: 87%;
+        gap: 30px;
+    }
+
+    .about-project__timeline {
+        width: 87%;
+        margin: 92px auto 90px auto;
+    }
+
+    .about-project__content_subtitle {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .about-project__content_title {
+        padding-bottom: 22px;
+    }
+
+    .about-project__backend {
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 320px) {
+    .about-project__header {
+        margin: 69px auto 0 auto;
+    }
+
+    .about-project__header-title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .about-project__container {
+        margin: 60px auto 0 auto;
+        flex-direction: column;
+        width: 90%;
+        gap: 59px;
+    }
+
+    .about-project__content_title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        padding-bottom: 15px;
+    }
+
+    .about-project__content_subtitle {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .about-project__timeline {
+        margin: 60px auto 110px auto;
+        width: 89%;
+    }
+
+    .about-project__backend {
+        max-width: 100px;
+    }
+
+    .about-project__backend-scale {
+        font-size: 11px;
+    }
+
+    .about-project__frontend-scale {
+        font-size: 11px;
+    }
+
+    .about-project__timeline-title {
+        font-size: 11px;
+        font-weight: 400;
+        padding-top: 8px;
+    }
+}

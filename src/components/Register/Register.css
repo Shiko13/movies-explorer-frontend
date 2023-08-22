@@ -1,0 +1,168 @@
+.register {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.register__header {
+    margin: 0 0 40px 0;
+    height: 38px;
+}
+
+.register__header:hover {
+    opacity: .5;
+}
+
+.register__container {
+    display: flex;
+    flex-direction: column;
+    max-width: 396px;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.register__greeting {
+    margin: 0 0 40px 0;
+    color: #fff;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register__inputs {
+    margin: 0 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register__inputs-title {
+    color: #8B8B8B;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 0 10px 0;
+}
+
+.register__input {
+    width: 396px;
+    height: 46px;
+    border-radius: 8px;
+    background: #2F2F2F;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left: 15px;
+}
+
+.register__button {
+    width: 396px;
+    height: 45px;
+    border-radius: 3px;
+    background: #4285F4;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-style: none;
+}
+
+.register__button:hover {
+    opacity: .5;
+}
+
+.register__hint {
+    color: #8B8B8B;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register__link {
+    color: #4285F4;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none; 
+}
+
+.register__link:hover {
+    opacity: .5;
+}
+
+.register__error {
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 0 69px 0;
+}
+
+@media (max-width: 768px) {
+    .register__container {
+        margin-top: 232px;
+    }
+}
+
+@media (max-width: 425px) {
+    .register__input {
+        width: 260px;
+    }
+
+    .register__inputs-container {
+        justify-content: center;
+        margin: 0 auto 0 auto;
+    }
+
+    .register__input {
+        padding: 0;
+        justify-content: center;
+    }
+
+    .register__error {
+        width: 260px;
+        margin: 0 auto 0 auto;
+    }
+
+    .register__header {
+        margin: 0 auto 50px auto;
+    }
+
+    .register__greeting {
+        margin: 0 auto 80px auto;
+    }
+
+    .register__button {
+        width: 260px;
+        margin: 157px auto 0 auto;
+        font-size: 12px;
+    }
+
+    .register__hint {
+        font-size: 12px;
+        margin-bottom: 30px;
+        margin-top: 15px;
+    }
+
+    .register__link {
+        font-size: 12px;
+    }
+
+    .register__container {
+        margin-top: 56px;
+    }
+}
