@@ -66,6 +66,20 @@
     width: 396px;
     height: 45px;
     border-radius: 3px;
+    background: #c6d2e4;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-style: none;
+}
+
+.login__button__active {
+    width: 396px;
+    height: 45px;
+    border-radius: 3px;
     background: #4285F4;
     color: #fff;
     text-align: center;
@@ -76,7 +90,7 @@
     border-style: none;
 }
 
-.login__button:hover {
+.login__button__active:hover {
     opacity: .5;
 }
 

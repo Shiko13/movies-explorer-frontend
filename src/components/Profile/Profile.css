@@ -44,6 +44,9 @@
     font-weight: 500;
     line-height: normal;
     margin: 0;
+    background-color: #202020;
+    border: none;
+    text-align: right;
 }
 
 .profile__data-email {
@@ -56,6 +59,20 @@
 }
 
 .profile__edit {
+    color: #850c0c;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+    margin-top: 220px;
+    padding: 0;
+    background-color: #202020;
+    border: none;
+}
+
+.profile__edit__active {
     color: #fff;
     text-align: center;
     font-size: 13px;
@@ -69,7 +86,7 @@
     border: none;
 }
 
-.profile__edit:hover {
+.profile__edit__active:hover {
     opacity: .5;
 }
 

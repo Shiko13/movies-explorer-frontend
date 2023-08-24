@@ -18,6 +18,9 @@
 
 .movies-card__poster {
     margin: 0 0 10px 0;
+    object-fit: cover;
+    width: 100%;
+    background-position: center;
 }
 
 .movies-card__info {
@@ -62,7 +65,7 @@
 }
 
 .movies-card__duration {
-    width: 34px;
+    width: max-content;
     height: 13px;
     color: #8B8B8B;
     font-size: 11px;
