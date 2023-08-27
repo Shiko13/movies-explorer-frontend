@@ -121,11 +121,13 @@ function App() {
   }, [savedMovies, currentUser]);
 
   useEffect(() => {
-    ApiConst.getMovies()
+    if (isLogin) {
+      ApiConst.getMovies()
       .then((data) => {
         setSavedMovies(data.movies);
       })
       .catch((err) => console.log(err));
+    }
   }, [isLogin]);
 
   function handleLogOut() {
