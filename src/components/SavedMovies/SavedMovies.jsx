@@ -69,10 +69,11 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
 
   function findMoviesInLocalStorage(title) {
     setIsPreloader(true);
-    console.log("title", title);
+    sessionStorage.setItem("titleSaved", title);
 
     let saved = JSON.parse(localStorage.getItem("savedMovies"));
     console.log('saved', saved);
+    console.log('title', title);
 
     if (title !== null) {
       let filteredMovies = saved.filter((movie) => {
@@ -96,7 +97,16 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
         setIsEmptyResult(true);
       }
     } else {
-      setFilteredMoviesList(saved);
+      let anotherFilteredMovies;
+      
+      if (isShort) {
+        anotherFilteredMovies = savedMovies.filter((movie) => {
+          return movie.duration <= SHORTMOVIE_DURATION;
+        });
+      }
+  
+      setFilteredMoviesList(anotherFilteredMovies);
+      setIsEmptyResult(false);
     }
   }
 
@@ -104,7 +114,6 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     setIsEmptyResult(false);
     setIsErrorSearch(false);
     setFilteredMoviesList({});
-    sessionStorage.setItem("titleSaved", title);
     findMoviesInLocalStorage(title);
   }
 
