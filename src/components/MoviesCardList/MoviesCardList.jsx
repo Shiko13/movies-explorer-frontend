@@ -84,7 +84,7 @@ function MoviesCardList({
 
   return (
     <section className="movie-card-list">
-      {Object.keys(filteredMoviesList).length !== 0 && (
+      {(filteredMoviesList !== null &&filteredMoviesList.length !== 0) && (
         <ul className="movie-card-list__container">
           {movieList.map((movie, index) => {
             return (

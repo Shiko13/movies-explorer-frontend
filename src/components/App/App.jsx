@@ -54,7 +54,7 @@ function App() {
       .then((res) => {
         authorizate(email, password);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function App() {
           setIsLogin(false);
           setIsLogin(true);
           navigate("/movies", { replace: true });
-        } 
+        }
       })
       .then((res) => {
         ApiConst.getInfoAboutMe().then((data) => {
@@ -94,7 +94,7 @@ function App() {
           localStorage.setItem("email", data.user.email);
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   function updateUser(email, name) {
@@ -104,7 +104,7 @@ function App() {
         localStorage.setItem("name", data.user.name);
         localStorage.setItem("email", data.user.email);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -123,10 +123,10 @@ function App() {
   useEffect(() => {
     if (isLogin) {
       ApiConst.getMovies()
-      .then((data) => {
-        setSavedMovies(data.movies);
-      })
-      .catch((err) => console.log(err));
+        .then((data) => {
+          setSavedMovies(data.movies);
+        })
+        .catch((err) => console.log(err));
     }
   }, [isLogin]);
 

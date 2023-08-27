@@ -100,14 +100,17 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
       let anotherFilteredMovies;
       
       if (isShort) {
-        anotherFilteredMovies = savedMovies.filter((movie) => {
+        anotherFilteredMovies = saved.filter((movie) => {
           return movie.duration <= SHORTMOVIE_DURATION;
         });
+      } else {
+        anotherFilteredMovies = saved;
       }
   
       setFilteredMoviesList(anotherFilteredMovies);
       setIsEmptyResult(false);
     }
+    sessionStorage.setItem("titleSaved", '');
   }
 
   function handleSearchSubmit(title) {
