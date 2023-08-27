@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import useValidation from "../../hooks/useValidation";
 
 function Login({ authorizate }) {
-  const { isValid, values, handleChange } =
+  const { isValid, values, handleChange, errors } =
     useValidation();
 
   function handleSubmit(e) {
@@ -32,6 +32,9 @@ function Login({ authorizate }) {
               name="email"
             />
           </div>
+          {!isValid && (
+          <span className="login__error">{errors.email || ''}</span>
+        )}
           <div className="login__inputs-container">
             <p className="login__inputs-title">Пароль</p>
             <input
@@ -45,7 +48,7 @@ function Login({ authorizate }) {
           </div>
         </div>
         {!isValid && (
-          <span className="login__error">Что-то пошло не так...</span>
+          <span className="login__error">{errors.password || ''}</span>
         )}
         <button type="submit" className={isValid ? "login__button__active" : "login__button"} disabled={!isValid}>
           Войти

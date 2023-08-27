@@ -50,6 +50,11 @@
     height: 16px;
     background-position: 50% 25%;
     padding: 0;
+    cursor: pointer;
+}
+
+.movies-card__button-like {
+    opacity: .5;
 }
 
 .movies-card__button_type_saved {

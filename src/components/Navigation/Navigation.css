@@ -8,6 +8,16 @@
     justify-content: center;
 }
 
+.navigation_main {
+    display: flex;
+    flex-direction: row;
+    background-color: #073042;
+    width: 100%;
+    box-sizing: border-box;
+    height: 74px;
+    justify-content: center;
+}
+
 .navigation__container {
     margin: 0 70px 0 70px;
     display: flex;

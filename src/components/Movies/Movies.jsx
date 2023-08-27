@@ -4,6 +4,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import React from "react";
 import Preloader from "../Preloader/Preloader";
 import { MoviesApiConst } from "../../utils/MoviesApi";
+import { SHORTMOVIE_DURATION } from "../../utils/constants";
 
 function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   const [previousSearch, setPreviousSearch] = React.useState(
@@ -13,6 +14,7 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   const [filteredMoviesList, setFilteredMoviesList] = React.useState({});
   const [isShort, setIsShort] = React.useState(checkIsShort);
   const [isErrorSearch, setIsErrorSearch] = React.useState(false);
+  const [isEmptyResult, setIsEmptyResult] = React.useState(false);
 
   React.useEffect(() => {
     renderingMovies();
@@ -23,12 +25,15 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     findMoviesInLocalStorage(title);
   }, [isShort]);
 
+  React.useEffect(() => {
+    setIsPreloader(false);
+  }, [isPreloader])
+
   function renderingMovies() {
     const filteredMovies = JSON.parse(sessionStorage.getItem("filteredMovies"));
 
     if (filteredMovies) {
       setFilteredMoviesList(filteredMovies);
-      setIsPreloader(false);
     }
   }
 
@@ -54,8 +59,8 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     }
   }
 
-  function getMovies() {
-    MoviesApiConst.getMovies()
+  async function getMovies() {
+    await MoviesApiConst.getMovies()
       .then((movies) => {
         localStorage.setItem("movies", JSON.stringify(movies));
       })
@@ -63,6 +68,7 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   }
 
   function findMoviesInLocalStorage(title) {
+    setIsPreloader(true);
     sessionStorage.removeItem("filteredMovies");
     setFilteredMoviesList({});
 
@@ -72,7 +78,6 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
       return;
     }
 
-    console.log('savedMovies inside findMoviesInLocalStorage', savedMovies);
     movies = movies.map((movie) => {
       const savedMovie = [savedMovies].find((savedMovie) => {
         return savedMovie.movieId === movie.id;
@@ -95,23 +100,24 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
 
       if (isShort) {
         filteredMovies = filteredMovies.filter((movie) => {
-          return movie.duration <= 40;
+          return movie.duration <= SHORTMOVIE_DURATION;
         });
       }
 
       setFilteredMoviesList(filteredMovies);
       sessionStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
-      setIsPreloader(false);
+      setIsEmptyResult(false);
 
       if (filteredMovies.length === 0) {
         sessionStorage.removeItem("filteredMovies");
         setFilteredMoviesList({});
-        setIsPreloader(true);
+        setIsEmptyResult(true);
       }
     }
   }
 
-  function handleSearchSubmit(title) {
+  async function handleSearchSubmit(title) {
+    setIsEmptyResult(false);
     setIsErrorSearch(false);
     setFilteredMoviesList({});
     sessionStorage.removeItem("filteredMovies");
@@ -120,13 +126,9 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     try {
       let movies = JSON.parse(localStorage.getItem("movies"));
 
-      if (!movies) {
-        getMovies();
+      if (movies === null) {
+        await getMovies();
         let movies = JSON.parse(localStorage.getItem("movies"));
-
-        if (!movies) {
-          return;
-        }
 
         movies = movies.filter((movie) => {
           return (
@@ -135,7 +137,6 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
           );
         });
 
-        console.log('savedMovies inside handleSearchSubmit', savedMovies);
         movies = movies.map((movie) => {
           const savedMovie = [savedMovies].find((savedMovie) => {
             return savedMovie.movieId === movie.id;
@@ -150,25 +151,23 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
 
         if (isShort) {
           movies = movies.filter((movie) => {
-            return movie.duration <= 40;
+            return movie.duration <= SHORTMOVIE_DURATION;
           });
         }
 
         if (Object.keys(movies).length === 0) {
           sessionStorage.removeItem("filteredMovies");
+          setIsEmptyResult(true);
         }
 
         sessionStorage.setItem("filteredMovie", JSON.stringify(movies));
         setFilteredMoviesList(movies);
-        setIsPreloader(false);
       } else {
         setFilteredMoviesList({});
         findMoviesInLocalStorage(title);
       }
     } catch (e) {
       setIsErrorSearch(true);
-      setIsPreloader(false);
-      console.log(e);
     }
   }
 
@@ -181,6 +180,7 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
         setIsPreloader={setIsPreloader}
         saveOfCheckingIsShort={saveOfCheckingIsShort}
         isShort={isShort}
+        isEmptyResult={isEmptyResult}
       />
       {isPreloader && <Preloader />}
       <MoviesCardList

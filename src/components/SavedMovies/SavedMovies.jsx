@@ -3,84 +3,108 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import React from "react";
+import { SHORTMOVIE_DURATION } from "../../utils/constants";
 
 function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
-  const [previousSearch, setPreviousSearch] = React.useState(
-    sessionStorage.getItem("title")
-  );
   const [isPreloader, setIsPreloader] = React.useState(false);
   const [filteredMoviesList, setFilteredMoviesList] = React.useState({});
   const [isShort, setIsShort] = React.useState(checkIsShort);
   const [isErrorSearch, setIsErrorSearch] = React.useState(false);
+  const [isEmptyResult, setIsEmptyResult] = React.useState(false);
 
   React.useEffect(() => {
-    setFilteredMoviesList(savedMovies);
+    renderingMovies();
   }, [savedMovies]);
 
   React.useEffect(() => {
-    const title = sessionStorage.getItem("title");
+    const title = sessionStorage.getItem("titleSaved");
     findMoviesInLocalStorage(title);
-  }, [isShort]);
+    setIsPreloader(false);
+  }, [isShort, setIsShort]);
 
-  function handleDeleteLike(movie) {
-    console.log(movie);
-    onDeleteCardClick(movie);
-    const updateList = filteredMoviesList.filter((m) => {
-      console.log(m);
-      return m._id !== movie._id
-    });
-    console.log('udpateList:', updateList);
-    setFilteredMoviesList(updateList);
+  React.useEffect(() => {
+    setIsPreloader(false);
+  }, [isPreloader])
+
+  function renderingMovies() {
+    let filteredMovies = JSON.parse(localStorage.getItem("savedMovies"));
+    console.log('filter', filteredMovies);
+
+    if (filteredMovies) {
+      setFilteredMoviesList(filteredMovies);
+      setIsEmptyResult(false);
+    }
   }
 
-  function checkIsShort() {
-    let isShort = localStorage.getItem("isShort");
-    if (isShort === "false" || isShort === null) {
-      return false;
-    } else {
-      localStorage.setItem("isShort", "true");
-      return true;
-    }
+  function handleDeleteFromSaved(movie) {
+    const updateList = filteredMoviesList.filter((m) => {
+      return m._id !== movie._id
+    });
+    setFilteredMoviesList(updateList);
+    localStorage.setItem("savedMovies", JSON.stringify(updateList));
+    onDeleteCardClick(movie);
   }
 
   function saveOfCheckingIsShort() {
     if (isShort) {
-      localStorage.removeItem("isShort");
+      localStorage.removeItem("isShortSaved");
       setIsShort(false);
     }
 
     if (!isShort) {
-      localStorage.setItem("isShort", "true");
+      localStorage.setItem("isShortSaved", "true");
       setIsShort(true);
     }
   }
 
-  function findMoviesInLocalStorage(title) {
-    let filteredMovies = savedMovies.filter((movie) => {
-      return (
-        movie.nameRU.toUpperCase().includes(title.toUpperCase()) ||
-        movie.nameEN.toUpperCase().includes(title.toUpperCase())
-      );
-    });
-
-    if (isShort) {
-      filteredMovies = filteredMovies.filter((movie) => {
-        return movie.duration <= 40;
-      });
+  function checkIsShort() {
+    let isShort = localStorage.getItem("isShortSaved");
+    if (isShort === "false" || isShort === null) {
+      return false;
+    } else {
+      localStorage.setItem("isShortSaved", "true");
+      return true;
     }
+  }
 
-    setFilteredMoviesList(filteredMovies);
-    setIsPreloader(false);
+  function findMoviesInLocalStorage(title) {
+    setIsPreloader(true);
+    console.log("title", title);
 
-    if (filteredMovies.length === 0) {
-      setFilteredMoviesList({});
-      setIsPreloader(true);
+    let saved = JSON.parse(localStorage.getItem("savedMovies"));
+    console.log('saved', saved);
+
+    if (title !== null) {
+      let filteredMovies = saved.filter((movie) => {
+        return (
+          movie.nameRU.toUpperCase().includes(title.toUpperCase()) ||
+          movie.nameEN.toUpperCase().includes(title.toUpperCase())
+        );
+      });
+  
+      if (isShort) {
+        filteredMovies = filteredMovies.filter((movie) => {
+          return movie.duration <= SHORTMOVIE_DURATION;
+        });
+      }
+  
+      setFilteredMoviesList(filteredMovies);
+      setIsEmptyResult(false);
+  
+      if (filteredMovies.length === 0) {
+        setFilteredMoviesList({});
+        setIsEmptyResult(true);
+      }
+    } else {
+      setFilteredMoviesList(saved);
     }
   }
 
   function handleSearchSubmit(title) {
+    setIsEmptyResult(false);
     setIsErrorSearch(false);
     setFilteredMoviesList({});
+    sessionStorage.setItem("titleSaved", title);
     findMoviesInLocalStorage(title);
   }
 
@@ -92,11 +116,12 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
         setIsPreloader={setIsPreloader}
         saveOfCheckingIsShort={saveOfCheckingIsShort}
         isShort={isShort}
+        isEmptyResult={isEmptyResult}
       />
       {isPreloader && <Preloader />}
       <MoviesCardList
         filteredMoviesList={filteredMoviesList}
-        onDeleteCardClick={handleDeleteLike}
+        onDeleteCardClick={handleDeleteFromSaved}
         onLikeCardClick={onLikeCardClick}
         savedMoviesList={savedMovies}
       />

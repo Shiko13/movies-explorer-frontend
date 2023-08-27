@@ -74,6 +74,7 @@
     font-weight: 500;
     line-height: normal;
     border-style: none;
+    margin-top: 69px;
 }
 
 .register__button__active {
@@ -88,6 +89,7 @@
     font-weight: 500;
     line-height: normal;
     border-style: none;
+    margin-top: 69px;
 }
 
 .register__button__active:hover {
@@ -123,7 +125,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin: 0 0 69px 0;
+    margin: 0;
 }
 
 @media (max-width: 768px) {

@@ -1,8 +1,9 @@
 import "./MoviesCardList.css";
 import { useState, useEffect } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
 import React from "react";
+import useResize from "use-resize";
+import {INITIAL_NUMBER, COUNT_ADDING, SCREEN_POINTS } from "../../utils/constants";
 
 function MoviesCardList({
   filteredMoviesList,
@@ -12,87 +13,97 @@ function MoviesCardList({
 }) {
   const [movieList, setMovieList] = useState([]);
   const [isShowButton, setIsShowButton] = useState(false);
+  const [firstCard, setFirstCard] = React.useState(0);
+  const size = useResize();
 
-  const LG_ROW_CARD_COUNT = 4;
-  const MD_ROW_CARD_COUNT = 2;
-  const SM_ROW_CARD_COUNT = 1;
+  React.useEffect(() => {
+    handleShowButton();
+  }, [movieList]);
 
-  const LG_INITIAL_CARD_COUNT = 16;
-  const MD_INITIAL_CARD_COUNT = 8;
-  const SM_INITIAL_CARD_COUNT = 5;
-
-  const isDesktop = useMediaQuery("(min-width: 1280px)");
-  const isTablet = useMediaQuery("(min-width: 768px)");
-
-  const cardColumnCount = isDesktop
-    ? LG_ROW_CARD_COUNT
-    : isTablet
-    ? MD_ROW_CARD_COUNT
-    : SM_ROW_CARD_COUNT;
-
-  const initialCardCount = isDesktop
-    ? LG_INITIAL_CARD_COUNT
-    : isTablet
-    ? MD_INITIAL_CARD_COUNT
-    : SM_INITIAL_CARD_COUNT;
-
-  const [visibleCardCount, setVisibleCardCount] =
-    React.useState(initialCardCount);
-
-  const handleClick = () => {
-    calculateCardCount();
-  };
-
-  const roundedVisibleCardCount =
-    Math.floor(visibleCardCount / cardColumnCount) * cardColumnCount;
-
-  const calculateCardCount = () => {
-    if (isDesktop) {
-      return setVisibleCardCount(visibleCardCount + LG_ROW_CARD_COUNT);
+  React.useEffect(() => {
+    renderFirstMovies();
+  }, [filteredMoviesList]);
+  
+  function renderAddMovies(e) {
+    let count = 0;
+    if (size.width > SCREEN_POINTS.big) {
+      count = COUNT_ADDING.desktop;
+    } else if (SCREEN_POINTS.medium < size.width && size.width <= SCREEN_POINTS.big) {
+      count = COUNT_ADDING.laptop;
+    } else if (SCREEN_POINTS.small < size.width && size.width < SCREEN_POINTS.medium) {
+      count = COUNT_ADDING.tablet;
+    } else {
+      count = COUNT_ADDING.mobile;
     }
 
-    if (isTablet) {
-      return setVisibleCardCount(visibleCardCount + MD_ROW_CARD_COUNT);
+    let addCards = Array.from(filteredMoviesList).splice(firstCard, count);
+    setFirstCard(firstCard + count);
+    setMovieList(movieList.concat(addCards));
+  }
+
+  function renderFirstMovies() {
+    setMovieList([]);
+    let startSplitPosition = 0;
+    if (size.width > SCREEN_POINTS.big) {
+      startSplitPosition = INITIAL_NUMBER.desktop;
+    } else if (SCREEN_POINTS.medium < size.width && size.width <= SCREEN_POINTS.big) {
+      startSplitPosition = INITIAL_NUMBER.laptop;
+    } else if (SCREEN_POINTS.small < size.width && size.width <= SCREEN_POINTS.medium) {
+      startSplitPosition = INITIAL_NUMBER.tablet;
+    } else {
+      startSplitPosition = INITIAL_NUMBER.mobile;
+    }
+    let movies = Array.from(filteredMoviesList).splice(0, startSplitPosition);
+    movies = movies.filter(Boolean);
+    setMovieList(movies);
+    setFirstCard(startSplitPosition - 1);
+  }
+
+  function handleShowButton() {
+    let step = 0;
+    if (size.width > SCREEN_POINTS.big) {
+      step = INITIAL_NUMBER.desktop;
+    } else if (SCREEN_POINTS.medium < size.width && size.width < SCREEN_POINTS.big) {
+      step = INITIAL_NUMBER.laptop;
+    } else if (SCREEN_POINTS.small < size.width && size.width < SCREEN_POINTS.medium) {
+      step = INITIAL_NUMBER.tablet;
+    } else {
+      step = INITIAL_NUMBER.mobile;
     }
 
-    setVisibleCardCount(visibleCardCount + SM_ROW_CARD_COUNT + 1);
-  };
+    const isAnotherMoviesExist = firstCard >= filteredMoviesList.length;
+    const isShowed = movieList.length >= step;
+    setIsShowButton(isShowed && !isAnotherMoviesExist);
+  }
 
   function checkIsSaved(movieList, movie) {
     return movieList.find((m) => {
-        return m.movieId === (movie.id || movie.movieId)
+      return m.movieId === (movie.id || movie.movieId);
     });
   }
 
-  useEffect(() => {
-    let movies = Array.from(filteredMoviesList).slice(
-      0,
-      roundedVisibleCardCount
-    );
-    setMovieList(movies);
-    if (filteredMoviesList.length > roundedVisibleCardCount) {
-      setIsShowButton(true);
-    }
-  }, [filteredMoviesList, initialCardCount, roundedVisibleCardCount]);
-
   return (
     <section className="movie-card-list">
-      <ul className="movie-card-list__container">
-        {movieList.map((movie) => (
-          <MoviesCard
-            key={movie.id || movie._id}
-            movie={movie}
-            isSaved={checkIsSaved(savedMoviesList, movie)}
-            onDeleteCardClick={onDeleteCardClick}
-            onLikeCardClick={onLikeCardClick}
-          />
-        ))}
-      </ul>
+      {Object.keys(filteredMoviesList).length !== 0 && (
+        <ul className="movie-card-list__container">
+          {movieList.map((movie, index) => {
+            return (
+              <MoviesCard
+                key={index}
+                movie={movie}
+                isSaved={checkIsSaved(savedMoviesList, movie)}
+                onDeleteCardClick={onDeleteCardClick}
+                onLikeCardClick={onLikeCardClick}
+              />
+            );
+          })}
+        </ul>
+      )}
       {isShowButton && (
         <button
           type="submit"
           className="movie-card-list__button"
-          onClick={handleClick}
+          onClick={renderAddMovies}
         >
           Ещё
         </button>

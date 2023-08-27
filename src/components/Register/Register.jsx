@@ -5,7 +5,7 @@ import useValidation from "../../hooks/useValidation";
 import { useEffect } from "react";
 
 function Register({ register }) {
-  const { isValid, values, clearForm, handleChange } =
+  const { isValid, values, clearForm, handleChange, errors } =
     useValidation();
 
   useEffect(() => {
@@ -39,6 +39,9 @@ function Register({ register }) {
               name="name"
             />
           </div>
+          {!isValid && (
+          <span className="register__error">{errors.name || ''}</span>
+        )}
           <div className="register__inputs-container">
             <p className="register__inputs-title">E-mail</p>
             <input
@@ -51,6 +54,9 @@ function Register({ register }) {
               name="email"
             />
           </div>
+          {!isValid && (
+          <span className="register__error">{errors.email || ''}</span>
+        )}
           <div className="register__inputs-container">
             <p className="register__inputs-title">Пароль</p>
             <input
@@ -64,7 +70,7 @@ function Register({ register }) {
           </div>
         </div>
         {!isValid && (
-          <span className="register__error">Что-то пошло не так...</span>
+          <span className="register__error">{errors.password || ''}</span>
         )}
         <button type="submit" className={isValid ? "register__button__active" : "register__button"} disabled={!isValid}>
           Зарегистрироваться

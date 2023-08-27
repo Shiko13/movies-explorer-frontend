@@ -1,3 +1,4 @@
+import { MY_URL, MOVIE_URL } from "../utils/constants";
 class MainApi {
   constructor(data) {
     this.url = data.baseUrl;
@@ -52,8 +53,6 @@ class MainApi {
   }
 
   updateProfileData(data) {
-    console.log('api update');
-    console.log(data);
     const token = localStorage.getItem('token');
     return this._request(`${this.url}/users/me`, {
       method: "PATCH",
@@ -91,7 +90,7 @@ class MainApi {
         description: data.description,
         image: `https://api.nomoreparties.co/${data.image.url}`,
         trailerLink: data.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/beatfilm-movies/${data.image.url}`,
+        thumbnail: `${MOVIE_URL}/${data.image.url}`,
         movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
@@ -101,7 +100,6 @@ class MainApi {
 
   deleteMovie(id) {
     const token = localStorage.getItem('token');
-    console.log(id);
     return this._request(`${this.url}/movies/${id}`, {
       method: "DELETE",
       headers: {
@@ -113,7 +111,7 @@ class MainApi {
 }
 
 export const ApiConst = new MainApi({
-  baseUrl: "https://api.s-al-terentev-movies.nomoreparties.co",
+  baseUrl: `${MY_URL}`,
   headers: {
     "Content-Type": "application/json",
   },

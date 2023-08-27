@@ -2,7 +2,7 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import React from "react";
 
-function SearchForm({ previousSearch, onSubmit, setIsPreloader, saveOfCheckingIsShort, isShort, isErrorSearch }) {
+function SearchForm({ previousSearch, onSubmit, setIsPreloader, saveOfCheckingIsShort, isShort, isErrorSearch, isEmptyResult }) {
   const [input, setInput] = React.useState("");
   const [search, setSearch] = React.useState(previousSearch);
   const [isEmptySearch, setIsEmptySearch] = React.useState(false);
@@ -54,6 +54,9 @@ function SearchForm({ previousSearch, onSubmit, setIsPreloader, saveOfCheckingIs
         </form>
       </section>
       <FilterCheckbox saveOfCheckingIsShort={saveOfCheckingIsShort} isShort={isShort}/>
+      {isEmptyResult && (
+            <span className="search-form__error">Ничего не найдено.</span>
+          )}
     </>
   );
 }

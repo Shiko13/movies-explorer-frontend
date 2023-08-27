@@ -32,7 +32,7 @@ function Navigation() {
   }
 
   return (
-    <section className="navigation">
+    <section className={location.pathname === "/" ? "navigation_main" : "navigation"}>
       <div className="navigation__container">
         <Link to="/" className="navigation__logo">
           <img src={logo} alt="Логотип с буквой «С»" />

@@ -107,6 +107,16 @@
     opacity: .5;
 }
 
+.profile__message {
+    color: aqua;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 16px;
+}
+
 @media (max-width: 768px) {
     .profile__container {
         margin: 232px 0 267px 0;
