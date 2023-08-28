@@ -19,7 +19,7 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   React.useEffect(() => {
     const title = sessionStorage.getItem("titleSaved");
     findMoviesInLocalStorage(title);
-    setIsPreloader(false);
+    // setIsPreloader(false);
   }, [isShort, setIsShort]);
 
   React.useEffect(() => {
@@ -28,7 +28,6 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
 
   function renderingMovies() {
     let filteredMovies = JSON.parse(localStorage.getItem("savedMovies"));
-    console.log('filter', filteredMovies);
 
     if (filteredMovies) {
       setFilteredMoviesList(filteredMovies);
@@ -72,8 +71,6 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     sessionStorage.setItem("titleSaved", title);
 
     let saved = JSON.parse(localStorage.getItem("savedMovies"));
-    console.log('saved', saved);
-    console.log('title', title);
 
     if (title !== null) {
       let filteredMovies = saved.filter((movie) => {

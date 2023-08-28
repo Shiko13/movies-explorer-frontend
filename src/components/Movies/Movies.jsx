@@ -1,7 +1,7 @@
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import React from "react";
+import React, { useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
 import { MoviesApiConst } from "../../utils/MoviesApi";
 import { SHORTMOVIE_DURATION } from "../../utils/constants";
@@ -23,11 +23,12 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   React.useEffect(() => {
     const title = sessionStorage.getItem("title");
     findMoviesInLocalStorage(title);
+    // setIsPreloader(false);
   }, [isShort]);
 
-  React.useEffect(() => {
-    setIsPreloader(false);
-  }, [isPreloader])
+  // React.useEffect(() => {
+  //   console.log(isPreloader);
+  // }, [isPreloader])
 
   function renderingMovies() {
     const filteredMovies = JSON.parse(sessionStorage.getItem("filteredMovies"));
@@ -60,15 +61,19 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   }
 
   async function getMovies() {
+    setIsPreloader(true);
+    console.log('getMovies');
     await MoviesApiConst.getMovies()
       .then((movies) => {
         localStorage.setItem("movies", JSON.stringify(movies));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsPreloader(false);
+      })
   }
 
   function findMoviesInLocalStorage(title) {
-    setIsPreloader(true);
     sessionStorage.removeItem("filteredMovies");
     setFilteredMoviesList({});
 
@@ -116,12 +121,19 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     }
   }
 
+  React.useEffect(() => {
+    setIsPreloader(false);
+  }, [isPreloader])
+
+
   async function handleSearchSubmit(title) {
     setIsEmptyResult(false);
     setIsErrorSearch(false);
     setFilteredMoviesList({});
     sessionStorage.removeItem("filteredMovies");
     sessionStorage.setItem("title", title);
+    setIsPreloader(true);
+    console.log('before try');
 
     try {
       let movies = JSON.parse(localStorage.getItem("movies"));
@@ -168,7 +180,7 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
       }
     } catch (e) {
       setIsErrorSearch(true);
-    }
+    } 
   }
 
   return (
@@ -177,10 +189,10 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
         previousSearch={previousSearch}
         onSubmit={handleSearchSubmit}
         isErrorSearch={isErrorSearch}
-        setIsPreloader={setIsPreloader}
         saveOfCheckingIsShort={saveOfCheckingIsShort}
         isShort={isShort}
         isEmptyResult={isEmptyResult}
+        setIsPreloader={setIsPreloader}
       />
       {isPreloader && <Preloader />}
       <MoviesCardList

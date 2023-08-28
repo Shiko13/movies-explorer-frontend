@@ -28,9 +28,9 @@ function SearchForm({ previousSearch, onSubmit, setIsPreloader, saveOfCheckingIs
     }
 
     if (input !== '') {
-        setIsPreloader(true);
         onSubmit(input);
     } 
+
   }
 
   return (
