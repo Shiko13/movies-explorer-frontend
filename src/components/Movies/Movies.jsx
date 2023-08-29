@@ -23,12 +23,7 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   React.useEffect(() => {
     const title = sessionStorage.getItem("title");
     findMoviesInLocalStorage(title);
-    // setIsPreloader(false);
   }, [isShort]);
-
-  // React.useEffect(() => {
-  //   console.log(isPreloader);
-  // }, [isPreloader])
 
   function renderingMovies() {
     const filteredMovies = JSON.parse(sessionStorage.getItem("filteredMovies"));
@@ -62,7 +57,6 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
 
   async function getMovies() {
     setIsPreloader(true);
-    console.log('getMovies');
     await MoviesApiConst.getMovies()
       .then((movies) => {
         localStorage.setItem("movies", JSON.stringify(movies));
@@ -133,7 +127,6 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     sessionStorage.removeItem("filteredMovies");
     sessionStorage.setItem("title", title);
     setIsPreloader(true);
-    console.log('before try');
 
     try {
       let movies = JSON.parse(localStorage.getItem("movies"));
@@ -172,7 +165,6 @@ function Movies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
           setIsEmptyResult(true);
         }
 
-        sessionStorage.setItem("filteredMovie", JSON.stringify(movies));
         setFilteredMoviesList(movies);
       } else {
         setFilteredMoviesList({});

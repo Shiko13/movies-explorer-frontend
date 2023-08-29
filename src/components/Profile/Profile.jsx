@@ -27,10 +27,6 @@ function Profile({ handleLogOut, handleSubmit }) {
 
   function handleUpdateUser(e) {
     e.preventDefault();
-    console.log('currentUser.name', currentUser.name);
-    console.log('values.name', values.name);
-    console.log('currentUser.email', currentUser.email);
-    console.log('values.email', values.email);
     if (currentUser.name !== values.name || currentUser.email !== values.email) {
       handleSubmit({ email: values.email, name: values.name });
       setSuccessMessage(true);

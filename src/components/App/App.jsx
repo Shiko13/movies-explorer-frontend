@@ -17,6 +17,7 @@ import {
   useNavigate,
   useLocation,
   Navigate,
+  Link,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ApiConst } from "../../utils/MainApi";
@@ -29,16 +30,18 @@ function App() {
   const location = useLocation();
 
   function onDeleteCardClick(movie) {
-    ApiConst.deleteMovie(movie._id).then(() => {
+    const savedMovie = savedMovies.find((m) => m.nameRU === movie.nameRU);
+    ApiConst.deleteMovie(savedMovie._id).then(() => {
       const updatedList = savedMovies.filter((m) => {
-        if (m.movieId === movie.id || m.id === movie.id) {
+        if (m.nameRU === movie.nameRU) {
           return false;
         } else {
           return true;
         }
       });
       setSavedMovies(updatedList);
-    });
+    })
+    .catch((err) => console.log(err));
   }
 
   function onLikeCardClick(movie) {
@@ -59,14 +62,8 @@ function App() {
 
   useEffect(() => {
     checkToken();
-    const path = localStorage.getItem("path");
-    if (path) {
-      navigate(path);
-    }
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("path", location.pathname);
+    navigate(location.pathname);
   }, [location.pathname]);
 
   function checkToken() {
@@ -117,18 +114,23 @@ function App() {
   }, [currentUser]);
 
   useEffect(() => {
-    localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-  }, [savedMovies, currentUser]);
+    localStorage.setItem("savedMoviesStorage", JSON.stringify(savedMovies));
+  }, [currentUser, savedMovies]);
 
   useEffect(() => {
+    let saved = localStorage.getItem('savedMoviesStorage');
+
     if (isLogin) {
       ApiConst.getMovies()
         .then((data) => {
           setSavedMovies(data.movies);
         })
         .catch((err) => console.log(err));
+    } else {
+      saved = JSON.parse(saved);
+      setSavedMovies(saved);
     }
-  }, [isLogin]);
+  }, [currentUser, isLogin]);
 
   function handleLogOut() {
     setCurrentUser({});
@@ -139,10 +141,15 @@ function App() {
     navigate("/");
   }
 
+  function handleBack() {
+    navigate(-2);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
+          <Route path="/*" element={<NotFound handleBack={handleBack} />} />
           <Route
             path="/"
             element={
@@ -222,14 +229,6 @@ function App() {
                   </>
                 }
               ></ProtectedRoute>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <>
-                <NotFound />
-              </>
             }
           />
         </Routes>

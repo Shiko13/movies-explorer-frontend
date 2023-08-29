@@ -8,40 +8,38 @@ import { SHORTMOVIE_DURATION } from "../../utils/constants";
 function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   const [isPreloader, setIsPreloader] = React.useState(false);
   const [filteredMoviesList, setFilteredMoviesList] = React.useState({});
-  const [isShort, setIsShort] = React.useState(checkIsShort);
+  const [isShort, setIsShort] = React.useState(false);
   const [isErrorSearch, setIsErrorSearch] = React.useState(false);
   const [isEmptyResult, setIsEmptyResult] = React.useState(false);
 
   React.useEffect(() => {
-    renderingMovies();
+    let filteredFilms = JSON.parse(localStorage.getItem("savedMoviesStorage"));
+    if (filteredFilms.length === 0) {
+      filteredFilms = savedMovies;
+    }
+    if (filteredFilms) {
+      setFilteredMoviesList(filteredFilms);
+      sessionStorage.removeItem("titleSaved");
+      setIsEmptyResult(false);
+    }
   }, [savedMovies]);
 
   React.useEffect(() => {
     const title = sessionStorage.getItem("titleSaved");
     findMoviesInLocalStorage(title);
-    // setIsPreloader(false);
-  }, [isShort, setIsShort]);
+  }, [isShort]);
 
   React.useEffect(() => {
     setIsPreloader(false);
   }, [isPreloader])
 
-  function renderingMovies() {
-    let filteredMovies = JSON.parse(localStorage.getItem("savedMovies"));
-
-    if (filteredMovies) {
-      setFilteredMoviesList(filteredMovies);
-      setIsEmptyResult(false);
-    }
-  }
-
   function handleDeleteFromSaved(movie) {
+    onDeleteCardClick(movie);
     const updateList = filteredMoviesList.filter((m) => {
       return m._id !== movie._id
     });
     setFilteredMoviesList(updateList);
-    localStorage.setItem("savedMovies", JSON.stringify(updateList));
-    onDeleteCardClick(movie);
+    localStorage.setItem("savedMoviesStorage", JSON.stringify(updateList));
   }
 
   function saveOfCheckingIsShort() {
@@ -56,65 +54,38 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     }
   }
 
-  function checkIsShort() {
-    let isShort = localStorage.getItem("isShortSaved");
-    if (isShort === "false" || isShort === null) {
-      return false;
-    } else {
-      localStorage.setItem("isShortSaved", "true");
-      return true;
-    }
-  }
-
-  function findMoviesInLocalStorage(title) {
-    setIsPreloader(true);
-    sessionStorage.setItem("titleSaved", title);
-
-    let saved = JSON.parse(localStorage.getItem("savedMovies"));
-
-    if (title !== null) {
-      let filteredMovies = saved.filter((movie) => {
-        return (
-          movie.nameRU.toUpperCase().includes(title.toUpperCase()) ||
-          movie.nameEN.toUpperCase().includes(title.toUpperCase())
-        );
-      });
-  
-      if (isShort) {
-        filteredMovies = filteredMovies.filter((movie) => {
-          return movie.duration <= SHORTMOVIE_DURATION;
-        });
-      }
-  
-      setFilteredMoviesList(filteredMovies);
-      setIsEmptyResult(false);
-  
-      if (filteredMovies.length === 0) {
-        setFilteredMoviesList({});
-        setIsEmptyResult(true);
-      }
-    } else {
-      let anotherFilteredMovies;
-      
-      if (isShort) {
-        anotherFilteredMovies = saved.filter((movie) => {
-          return movie.duration <= SHORTMOVIE_DURATION;
-        });
-      } else {
-        anotherFilteredMovies = saved;
-      }
-  
-      setFilteredMoviesList(anotherFilteredMovies);
-      setIsEmptyResult(false);
-    }
-    sessionStorage.setItem("titleSaved", '');
-  }
-
   function handleSearchSubmit(title) {
     setIsEmptyResult(false);
     setIsErrorSearch(false);
     setFilteredMoviesList({});
     findMoviesInLocalStorage(title);
+  }
+
+  function findMoviesInLocalStorage(title) {
+    let filteredFilms = JSON.parse(localStorage.getItem("savedMoviesStorage"));
+
+    if (title !== null) {
+      sessionStorage.setItem("titleSaved", title);
+      filteredFilms = filteredFilms.filter((movie) => {
+        return movie.nameRU.toLowerCase().includes(title.toLowerCase());
+      });
+    } 
+    
+    if (isShort) {
+      filteredFilms = filteredFilms.filter((movie) => {
+        return movie.duration < SHORTMOVIE_DURATION;
+      });
+    }
+
+    setFilteredMoviesList(filteredFilms);
+    setIsPreloader(false);
+
+    if (filteredFilms.length === 0) {
+      setFilteredMoviesList({});
+      setIsEmptyResult(true);
+    } else {
+      setIsEmptyResult(false);
+    }
   }
 
   return (

@@ -1,13 +1,10 @@
 import "./NotFound.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
 
-function NotFound() {
+function NotFound({handleBack }) {
+    const location = useLocation();
     const navigate = useNavigate();
-
-    function handleClick(e) {
-        e.preventDefault();
-        navigate(-1);
-    }
 
     return(
         <section className="not-found">
@@ -19,7 +16,7 @@ function NotFound() {
                     Страница не найдена
                 </h2>
             </div>
-            <button className="not-found__navigation" onClick={handleClick}>
+            <button className="not-found__navigation" onClick={handleBack}>
                 Назад
             </button>        
         </section>

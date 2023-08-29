@@ -28,9 +28,9 @@ function MoviesCardList({
     let count = 0;
     if (size.width > SCREEN_POINTS.big) {
       count = COUNT_ADDING.desktop;
-    } else if (SCREEN_POINTS.medium < size.width && size.width <= SCREEN_POINTS.big) {
+    } else if (SCREEN_POINTS.medium <= size.width && size.width <= SCREEN_POINTS.big) {
       count = COUNT_ADDING.laptop;
-    } else if (SCREEN_POINTS.small < size.width && size.width < SCREEN_POINTS.medium) {
+    } else if (SCREEN_POINTS.small <= size.width && size.width <= SCREEN_POINTS.medium) {
       count = COUNT_ADDING.tablet;
     } else {
       count = COUNT_ADDING.mobile;
@@ -46,9 +46,9 @@ function MoviesCardList({
     let startSplitPosition = 0;
     if (size.width > SCREEN_POINTS.big) {
       startSplitPosition = INITIAL_NUMBER.desktop;
-    } else if (SCREEN_POINTS.medium < size.width && size.width <= SCREEN_POINTS.big) {
+    } else if (SCREEN_POINTS.medium <= size.width && size.width <= SCREEN_POINTS.big) {
       startSplitPosition = INITIAL_NUMBER.laptop;
-    } else if (SCREEN_POINTS.small < size.width && size.width <= SCREEN_POINTS.medium) {
+    } else if (SCREEN_POINTS.small <= size.width && size.width <= SCREEN_POINTS.medium) {
       startSplitPosition = INITIAL_NUMBER.tablet;
     } else {
       startSplitPosition = INITIAL_NUMBER.mobile;

@@ -14,9 +14,9 @@ const COUNT_ADDING = {
   mobile: 2,
 };
 const SCREEN_POINTS = {
-  big: 1140,
+  big: 1200,
   medium: 850,
-  small: 500
+  small: 560
 }
 
 export { MY_URL, MOVIE_URL, SHORTMOVIE_DURATION, INITIAL_NUMBER, COUNT_ADDING, SCREEN_POINTS };
