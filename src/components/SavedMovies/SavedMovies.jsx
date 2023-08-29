@@ -13,6 +13,7 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   const [isEmptyResult, setIsEmptyResult] = React.useState(false);
 
   React.useEffect(() => {
+    setIsPreloader(true);
     let filteredFilms = JSON.parse(localStorage.getItem("savedMoviesStorage"));
     if (filteredFilms.length === 0) {
       filteredFilms = savedMovies;
@@ -62,6 +63,7 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
   }
 
   function findMoviesInLocalStorage(title) {
+    // setIsPreloader(true);
     let filteredFilms = JSON.parse(localStorage.getItem("savedMoviesStorage"));
 
     if (title !== null) {
@@ -78,7 +80,7 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     }
 
     setFilteredMoviesList(filteredFilms);
-    setIsPreloader(false);
+    
 
     if (filteredFilms.length === 0) {
       setFilteredMoviesList({});
@@ -86,6 +88,7 @@ function SavedMovies({ savedMovies, onDeleteCardClick, onLikeCardClick }) {
     } else {
       setIsEmptyResult(false);
     }
+    // setIsPreloader(false);
   }
 
   return (

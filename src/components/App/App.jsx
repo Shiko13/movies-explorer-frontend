@@ -69,7 +69,14 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem("token");
     if (jwt) {
-      setIsLogin(true);
+      ApiConst.checkToken(jwt)
+      .then((data) => {
+         setIsLogin(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        handleLogOut();
+      })      
     }
   }
 
@@ -78,8 +85,6 @@ function App() {
       .then((jwt) => {
         if (jwt.token) {
           localStorage.setItem("token", jwt.token);
-          setIsLogin(true);
-          setIsLogin(false);
           setIsLogin(true);
           navigate("/movies", { replace: true });
         }
