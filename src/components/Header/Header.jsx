@@ -10,12 +10,12 @@ function Header() {
           <img src={logo} alt="Логотип с буквой «С»" />
         </Link>
         <div className="header__links">
-          <a className="header__links-registration" href="/signup">
+          <Link to="/signup" className="header__links-registration" >
             Регистрация
-          </a>
-          <a className="header__links-login" href="/signin">
+          </Link>
+          <Link to="/signin" className="header__links-login" >
             Войти
-          </a>
+          </Link>
         </div>
       </div>
     </header>

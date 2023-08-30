@@ -40,6 +40,12 @@
     font-weight: 400;
     line-height: normal;
     margin: 0 auto 60px auto;
+    background-color: #202020;
+    border: none;
+}
+
+.not-found__navigation:hover {
+    opacity: .5;
 }
 
 @media (max-width: 320px) {

@@ -32,7 +32,7 @@ function Navigation() {
   }
 
   return (
-    <section className="navigation">
+    <section className={location.pathname === "/" ? "navigation_main" : "navigation"}>
       <div className="navigation__container">
         <Link to="/" className="navigation__logo">
           <img src={logo} alt="Логотип с буквой «С»" />
@@ -41,17 +41,17 @@ function Navigation() {
         {!isBurger && (
           <>
             <div className="navigation__movies-links">
-              <a className="navigation__movies" href="/movies">
+              <Link to="/movies" className="navigation__movies" >
                 Фильмы
-              </a>
-              <a className="navigation__saved-movies" href="/saved-movies">
+              </Link>
+              <Link to="/saved-movies" className="navigation__saved-movies" >
                 Сохранённые фильмы
-              </a>
+              </Link>
             </div>
             <div className="navigation__account">
-              <a className="navigation__account-link" href="/profile">
+              <Link to="/profile" className="navigation__account-link" >
                 Аккаунт
-              </a>
+              </Link>
               <div className="navigation__account-image">
                 <img
                   className="navigation__account-image_src"

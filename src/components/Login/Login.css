@@ -66,6 +66,21 @@
     width: 396px;
     height: 45px;
     border-radius: 3px;
+    background: #c6d2e4;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-style: none;
+    margin-top: 157px;
+}
+
+.login__button__active {
+    width: 396px;
+    height: 45px;
+    border-radius: 3px;
     background: #4285F4;
     color: #fff;
     text-align: center;
@@ -74,9 +89,10 @@
     font-weight: 500;
     line-height: normal;
     border-style: none;
+    margin-top: 157px;
 }
 
-.login__button:hover {
+.login__button__active:hover {
     opacity: .5;
 }
 
@@ -109,7 +125,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin: 0 0 157px 0;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
